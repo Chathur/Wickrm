@@ -1,0 +1,21 @@
+﻿@model Project_MVC5.Models.ITEMS
+@{
+    ViewBag.Title = "Stock Reports";
+    Layout = "~/Views/Shared/_SalesLayout.cshtml";
+}
+
+<br /><br />
+
+<form class="form-horizontal" action="/Report_Stock/Export/" method="post">
+
+    <div class="form-horizontal">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="SearchButton" type="submit" value="Current Stock" class="btn btn-primary text-center" />
+    </div>
+</form>
+<br /><br />
+<form class="form-horizontal" action="/Report_Stock/ExportValuation/" method="post">
+
+    <div class="form-horizontal">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="SearchButton" type="submit" value="Stock Valuation" class="btn btn-primary text-center" />
+    </div>
+</form>

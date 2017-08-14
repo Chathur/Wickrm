@@ -1,0 +1,182 @@
+﻿@model Project_MVC5.Models.ITEMS
+
+@using PagedList.Mvc;
+
+@{
+    /////////////////////////////////////////
+    //////////////////////////////////////// Check delete
+    ViewBag.Title = "Items";
+    Layout = "~/Views/Shared/_SalesLayout.cshtml";
+
+
+    string Name_Item = Model.Name_Item;
+    var Code = "";
+    int ? Stock = 0;
+    var Type = "";
+
+    if (Model.SearchResults != null)
+    {
+
+        var list = Model.SearchResults;
+        foreach (var item in Model.SearchResults)
+        {
+            Name_Item = item.Name_Item;
+            Code = item.StockCode;
+            Type = item.Type;
+            Stock = item.MIN_MIN_STOCK_LEVEL;
+
+        }
+
+
+    }
+
+
+}
+<link href="~/Content/datepicker3.css" rel="stylesheet" />
+
+<section class="content">
+    <div class="box box-info">
+
+
+        <div class="box-body">
+
+            <form class="form-horizontal" action="/Stock_SearchItem/SearchItem/" method="post">
+
+                <div class="form-horizontal form-control-static">
+
+                    <div class="form-group-sm form-inline form-control-static">
+                        <label class="control-label col-md-push-12">Item Name</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" class="form-control col-md-push-12 bg-gray-light" name="Name_Item" id="Name_Item" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                </div>
+                <div class="form-horizontal">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="SearchButton" type="submit" value="Search" class="btn btn-primary text-center" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <div class="box box-success">
+
+
+        <div class="box-body">
+            <form class="form-horizontal" action="/Stock_SearchItem/AddorEdit" method="post">
+
+                <div class="form-horizontal form-control-static ">
+
+
+                    <div class="form-group-sm form-inline form-control-static">
+
+                        <label class="control-label col-md-push-12">Item Name</label> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" class="form-control col-md-push-12 bg-gray-light" name="Name_Item" id="Name_Item" value="@Name_Item" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                        <label class="control-label col-md-push-12">Code</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" class="form-control col-md-push-12 bg-gray-light" name="StockCode" id="StockCode" value="@Code" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                        <label class="control-label col-md-push-12">Type</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" class="form-control col-md-push-12 bg-gray-light" name="Type" id="Type" value="@Type" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                        <label class="control-label col-md-push-12">Min.Stock</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" class="form-control col-md-push-12 bg-gray-light" name="MIN_MIN_STOCK_LEVEL" id="MIN_MIN_STOCK_LEVEL" value="@Stock" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    </div>
+                </div>
+                <br /><br />
+
+                <div class="form-group-sm form-inline form-control-static">
+                    
+                    <label class="control-label col-md-1">Cost Price</label>
+                    <input type="text" class="form-control col-md-1" name="COST_PRICE" id="COST_PRICE" />
+                    <label class="control-label col-md-1">Retail_Margin</label>
+                    <input type="text" class="form-control col-md-1" name="Retail_Margin" id="Retail_Margin" />
+                    <label class="control-label col-md-1">Trade_Margin</label>
+                    <input type="text" class="form-control col-md-1" name="Trade_Margin" id="Trade_Margin" />
+                    <input type="hidden" name="StockId"  id="StockId" />
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="ADD" class="btn btn-success text-center" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <br /><br /><br />
+
+    <div class="box box-warning">
+
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+                <tr>
+
+                    <th>Item Name</th>
+                    <th>Code</th>
+                    <th>Type</th>
+                    <th>Min.Stock</th>
+                    <th>Cost Price</th>
+                    <th>Retail_Margin</th>
+                    <th>Trade_Margin</th>
+
+                </tr>
+                <tbody>
+                    @if (Model.SearchResults != null)
+            {
+               
+                foreach (var item in Model.SearchResults)
+                {
+                   
+                            <tr class="main-data" data-id="@item.StockId">
+
+                                <td>@item.Name_Item</td>
+                                <td>@item.StockCode</td>
+                                <td>@item.Type</td>
+                                <td>@item.MIN_MIN_STOCK_LEVEL</td>
+                                <td>@item.COST_PRICE</td>
+                                <td>@item.Retail_Margin</td>
+                                <td>@item.Trade_Margin</td>
+                                <td>
+                                    <a href="/Stock_SearchItem/Delete/@item.StockId">Delete Item</a> | <a href="#" onclick="showedit(this)">Edit</a>
+                                </td>
+                            </tr>
+
+                        }
+    
+
+                    }
+
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</section>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap-datepicker.js"></script>
+
+<script>
+        function showedit(objects) {
+            var _this = $(objects).closest(".main-data");
+            $("#Name_Item").val(_this.find("td").eq(0).html());
+            $("#StockCode").val(_this.find("td").eq(1).html());
+            $("#Type").val(_this.find("td").eq(2).html());
+            $("#MIN_MIN_STOCK_LEVEL").val(_this.find("td").eq(3).html());
+            $("#COST_PRICE").val(_this.find("td").eq(4).html());
+            $("#Retail_Margin").val(_this.find("td").eq(5).html());
+            $("#Trade_Margin").val(_this.find("td").eq(6).html());
+            $("#StockId").val(_this.attr("data-id"));
+        }
+        //Date picker
+        $('#Date').datepicker({
+            autoclose: true
+        });
+
+</script>
+
+
+
+
+

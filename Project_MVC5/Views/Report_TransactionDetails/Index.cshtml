@@ -1,0 +1,43 @@
+﻿@model Project_MVC5.Models.tb_SalesOrder
+@{
+    ViewBag.Title = "Transaction Details Report";
+    Layout = "~/Views/Shared/_SalesLayout.cshtml";
+}
+
+<h4>Please Enter the Bill NO</h4>
+
+
+<form class="form-horizontal" action="/Report_TransactionDetails/Export/" method="post">
+
+    <div class="form-horizontal form-control-static">
+
+        <div class="form-group-sm form-inline form-control-static">
+            <label class="control-label col-md-push-12">Start Date</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" class="form-control col-md-push-12 bg-gray-light" name="Start_Date" id="Start_Date" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+        
+        <div class="form-group-sm form-inline form-control-static">
+            <label class="control-label col-md-push-12">End Date</label>&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" class="form-control col-md-push-12 bg-gray-light" name="End_Date" id="End_Date" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+    </div>
+    <div class="form-horizontal">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="SearchButton" type="submit" value="Search" class="btn btn-primary text-center" />
+    </div>
+</form>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap-datepicker.js"></script>
+
+<script>
+
+        //Date picker
+        $('#Start_Date').datepicker({
+            autoclose: true
+        });
+        $('#End_Date').datepicker({
+            autoclose: true
+        });
+
+</script>

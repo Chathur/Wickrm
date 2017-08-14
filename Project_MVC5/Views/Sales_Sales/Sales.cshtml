@@ -1,0 +1,194 @@
+﻿@model Project_MVC5.Models.tb_SalesOrder
+@using PagedList.Mvc;
+
+@{
+    /////////////////////////////////////////
+    //////////////////////////////////////// Check delete
+    ViewBag.Title = "Sales";
+    Layout = "~/Views/Shared/_SalesLayout.cshtml";
+
+
+    int ? Bill_No = Model.Bill_No ;
+    var Customer = "";
+    DateTime Date = DateTime.Now;
+    var Employee = "";
+
+    if (Model.SearchResults != null)
+    {
+
+        var list = Model.SearchResults;
+        foreach (var item in Model.SearchResults)
+        {
+            Bill_No = item.Bill_No;
+            Customer = item.Customer;
+            Date = item.Date;
+            Employee = item.Employee;
+
+        }
+
+
+    }
+
+
+}
+<link href="~/Content/datepicker3.css" rel="stylesheet" />
+
+<section class="content">
+    <div class="box box-info">
+
+
+        <div class="box-body">
+
+            <form class="form-horizontal" action="/Sales_Sales/Sales/" method="post">
+
+                <div class="form-horizontal form-control-static">
+
+                    <div class="form-group-sm form-inline form-control-static">
+                        <label class="control-label col-md-push-12">Bill No</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" class="form-control col-md-push-12 bg-gray-light" name="Bill_No" id="Bill_No" value="@Bill_No" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                </div>
+                <div class="form-horizontal">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="SearchButton" type="submit" value="Search" class="btn btn-primary text-center" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <div class="box box-success">
+
+
+        <div class="box-body">
+            <form class="form-horizontal" action="/Sales_Sales/AddorEdit/@Bill_No" method="post">
+
+                <div class="form-horizontal form-control-static ">
+
+
+                    <div class="form-group-sm form-inline form-control-static">
+
+                        <label class="control-label col-md-push-12">Customer</label> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" class="form-control col-md-push-12 bg-gray-light" name="Customer" id="Customer" value="@Customer" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        
+                        <input type="hidden" name="Sales_order_id" id="Sales_order_id" />
+                        <input type="hidden" name="item_id" id="item_id" />
+                        <input type="hidden" name="Bill_No" id="Bill_No" value="@Bill_No" />
+
+
+
+                        <label class="control-label col-md-push-12">Date</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" class="form-control col-md-push-12 bg-gray-light" name="Date" id="Date" value="@Date" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                        <label class="control-label col-md-push-12">Employee</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" class="form-control col-md-push-12 bg-gray-light" name="Employee" id="Employee" value="@Employee" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                </div>
+
+
+                <br /><br />
+
+                <div class="form-group-sm form-inline form-control-static">
+                    <label class="control-label col-md-1">Product Name</label>
+                    @Html.DropDownList("Name_Product", (ViewBag.products as SelectList), "-- Please Select an Item  --", new { style = "width:250px", @class = "form-control col-md-12 " })
+
+
+
+
+                    <label class="control-label col-md-1">Quantity</label>
+                    <input type="text" class="form-control col-md-1" name="Quantity" id="Quantity" />
+
+
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="ADD" class="btn btn-success text-center" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <br /><br /><br />
+
+    <div class="box box-warning">
+
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+                <tr>
+
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>quantity</th>
+                    <th>Total</th>
+
+                </tr>
+                <tbody>
+                    @if (Model.SearchResults != null)
+            {
+                double sum = 0;
+                foreach (var item in Model.SearchResults)
+                {
+                    sum += (double)item.Total;
+                            <tr class="main-data" data-id="@item.item_id">
+
+                                <td>@item.Name_Product</td>
+                                <td>@item.Price</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.Total</td>
+                                <td>
+                                    <a href="/Sales_Sales/Delete/@item.Sales_order_id">Delete</a>
+                                </td>
+                            </tr>
+
+                        }
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>Net Total : @sum</th>
+                        </tr>
+
+                    }
+
+                    <tr>
+                        <th>
+
+                            <form class="form-horizontal" action="/Sales_Sales/Add/@Bill_No" method="post">
+                                <div class="form-horizontal">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Save" class="btn btn-warning text-center" />
+                                </div>
+                            </form>
+                        </th>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+            </div>
+        </div>
+</section>
+
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+
+    <script>
+        function showedit(objects) {
+            var _this = $(objects).closest(".main-data");
+            $("#Name_Product").val(_this.find("td").eq(0).html());
+            $("#Price").val(_this.find("td").eq(1).html());
+            $("#Quantity").val(_this.find("td").eq(2).html());
+            $("#ID_Product").val(_this.attr("data-id"));
+
+        }
+        //Date picker
+        $('#Date').datepicker({
+            autoclose: true
+        });
+
+    </script>
+
+
+
+
+

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Project_MVC5.Models.tb_Supplier>
+
+@{
+    ViewBag.Title = "Suppliers";
+    Layout = "~/Views/Shared/_PurchaseLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name_Supplier)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Store_Supplier)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address_Supplier)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tel_Supplier)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name_Supplier)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Store_Supplier)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address_Supplier)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tel_Supplier)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.ID_Supplier }) |
+                @Html.ActionLink("Details", "Details", new { id=item.ID_Supplier }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.ID_Supplier })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

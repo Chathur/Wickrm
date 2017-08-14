@@ -1,0 +1,21 @@
+﻿@model Project_MVC5.Models.tb_Sales
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_SalesLayout.cshtml";
+}
+
+
+    <form class="form-horizontal" action="/Report_SalesDaily/Export/" method="post">
+
+        <div class="form-horizontal form-control-static">
+
+            <div class="form-group-sm form-inline form-control-static">
+                <label class="control-label col-md-push-12">Bill</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" class="form-control col-md-push-12 bg-gray-light" name="Bill_No" id="Bill_No" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+        </div>
+        <div class="form-horizontal">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="SearchButton" type="submit" value="Search" class="btn btn-primary text-center" />
+        </div>
+    </form>
+   

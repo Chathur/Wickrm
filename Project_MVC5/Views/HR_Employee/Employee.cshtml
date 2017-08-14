@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Employee";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+
+
+<section class="content">
+
+    <!-- Application buttons -->
+    <div class="row">
+        <div class="col-sm-3 col-lg-9 col-xs-6">
+
+            <!-- /.box-body -->
+            <!-- Small boxes (Stat box) -->
+
+            <br /><br />
+
+            <div class="col-sm-6 col-lg-6 col-xs-12">
+                <!-- small box -->
+                <a href="~/HR_Employee/SearchEmployee">
+                    <div class="small-box bg-maroon">
+                        <div class="inner">
+                            <h3>
+                                View Employee<br />Details
+                            </h3>
+                            <p><br /></p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-android-people"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- ./col -->
+            <div class="col-sm-6 col-lg-6 col-xs-12">
+                <!-- small box -->
+                <a href="~/HR_Employee/AddEmployee">
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h3>Add New <br />Employee</h3>
+                            <p><br /></p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-android-person-add"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="col-sm-4 col-lg-3 col-xs-3">
+
+            <br /><br />
+            <!-- Calendar -->
+            <div class="box box-solid bg-green-gradient">
+
+                <div class="box-header">
+                    <i class="fa fa-calendar"></i>
+
+                    <h3 class="box-title">Calendar</h3>
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+                        <!-- button with a dropdown -->
+
+                        <button type="button" class="btn btn-success btn-sm" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+
+                    </div>
+                    <!-- /. tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body no-padding">
+                    <!--The calendar -->
+                    <div id="calendar" style="width: 100%"></div>
+                </div>
+                <!-- /.box-body -->
+
+            </div>
+        </div>
+    </div>
+    <!-- /.box -->
+
+
+</section>
+

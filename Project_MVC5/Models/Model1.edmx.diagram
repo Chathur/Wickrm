@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0f9926506d5d4fcf8b5e9fff2aaea306" Name="Diagram1" ZoomLevel="71">
+        <EntityTypeShape EntityType="WICKRAMA_STORESModel.ITEMS" Width="1.5" PointX="0.875" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WICKRAMA_STORESModel.PaymentTerms" PointX="0.75" PointY="3" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WICKRAMA_STORESModel.Route" Width="1.5" PointX="13.25" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WICKRAMA_STORESModel.tb_Cart" Width="1.5" PointX="5" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WICKRAMA_STORESModel.tb_Customer" Width="1.5" PointX="15.125" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WICKRAMA_STORESModel.tb_Employee" Width="1.5" PointX="11.375" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WICKRAMA_STORESModel.tb_PurchaseReturns" Width="1.5" PointX="5" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WICKRAMA_STORESModel.tb_Sales" Width="1.5" PointX="3.125" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WICKRAMA_STORESModel.tb_SalesOrder" Width="1.5" PointX="7.5" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WICKRAMA_STORESModel.tb_SalesReturns" Width="1.5" PointX="5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WICKRAMA_STORESModel.tb_Supplier" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WICKRAMA_STORESModel.Users" Width="1.5" PointX="9.5" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector ManuallyRouted="false" Association="WICKRAMA_STORESModel.FK_VENDORS_PaymentTerms" />
+        <AssociationConnector Association="WICKRAMA_STORESModel.FK_Route_tb_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="WICKRAMA_STORESModel.FK_tb_Customer_tb_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="WICKRAMA_STORESModel.FK_tb_Employee_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

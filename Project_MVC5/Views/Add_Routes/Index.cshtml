@@ -1,0 +1,65 @@
+﻿@model Project_MVC5.Models.Route
+@{
+
+    ViewBag.Title = "routes";
+    Layout = "~/Views/Shared/_SalesLayout.cshtml";
+}
+
+<section class="content">
+    <div class="box box-info">
+        <div class="box-body">
+            <form class="form-horizontal" action="/Add_Routes/Index/" method="post">
+                <div class="form-horizontal form-control-static">
+                    <div class="form-group-sm form-inline form-control-static">
+                    <label class="control-label col-md-push-12">Route Name</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" class="form-control col-md-pudh-12 bg-gray-light" name="Name" id="Name" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                </div>
+                
+                <div class="form-horizontal">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="SearchButton" type="submit" value="Search" class="btn btn-primary text-center" />
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <br /><br /><br />
+
+    <div class="box box-warning">
+
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+                <tr>
+
+                    <th>Route Name</th>
+                    <th>City</th>
+                    <th>Employee</th>
+                    
+
+                </tr>
+                <tbody>
+
+                    @if (Model.SearchResults != null)
+                    {
+                        foreach (var item in Model.SearchResults)
+                        {
+                            <tr class="main-data">
+
+                                <td>@item.Name</td>
+                                <td>@item.City</td>
+                                <td>@item.tb_Employee.Name_Employee</td>
+                                
+
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+
+</section>

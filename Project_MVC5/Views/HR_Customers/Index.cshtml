@@ -1,0 +1,226 @@
+﻿@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+
+
+<section class="content">
+
+    <!-- Application buttons -->
+    <div class="row">
+        <div class="col-sm-3 col-lg-9 col-xs-6">
+
+            <!-- /.box-body -->
+            <!-- Small boxes (Stat box) -->
+
+            <br /><br />
+
+            <div class="col-sm-6 col-lg-6 col-xs-12">
+                <!-- small box -->
+                <a href="~/HR_Customers/SearchCustomer">
+                    <div class="small-box bg-maroon">
+                        <div class="inner">
+                            <h3>
+                                View Customer<br />Details
+                            </h3>
+                            <p><br /></p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-android-people"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- ./col -->
+            <div class="col-sm-6 col-lg-6 col-xs-12">
+                <!-- small box -->
+                <a href="~/Sales_Customer/Sales_Customer">
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h3>Add New <br />Customer</h3>
+                            <p><br /></p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-android-person-add"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+        
+        <div class="col-sm-4 col-lg-3 col-xs-3">
+            
+            <br /><br />
+            <!-- Calendar -->
+            <div class="box box-solid bg-green-gradient">
+                
+                <div class="box-header">
+                    <i class="fa fa-calendar"></i>
+
+                    <h3 class="box-title">Calendar</h3>
+                    <!-- tools box -->
+                    <div class="pull-right box-tools">
+                        <!-- button with a dropdown -->
+
+                        <button type="button" class="btn btn-success btn-sm" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+
+                    </div>
+                    <!-- /. tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body no-padding">
+                    <!--The calendar -->
+                    <div id="calendar" style="width: 100%"></div>
+                </div>
+                <!-- /.box-body -->
+
+            </div>
+        </div>
+    </div>
+    <!-- /.box -->
+    <div>
+
+        <div class="col-md-3">
+
+        </div>
+
+            <div class="col-md-6">
+                <!-- AREA CHART -->
+                <!-- /.box -->
+                <!-- DONUT CHART -->
+
+                <div class="box box-danger">
+
+                    <div class="box-header with-border">
+
+                        <h3 class="box-title">Customers-Route</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <canvas id="pieChart" style="height:250px"></canvas>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+
+        </div>
+
+
+
+
+
+</section>
+
+<script src="~/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="~/bootstrap/js/bootstrap.min.js"></script>
+<!-- ChartJS 1.0.1 -->
+<script src="~/plugins/chartjs/Chart.min.js"></script>
+<!-- FastClick -->
+<script src="~/plugins/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="~/dist/js/app.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src=".~/dist/js/demo.js"></script>
+<!-- page script -->
+<script>
+    $(function () {
+        /* ChartJS
+         * -------
+         * Here we will create a few charts using ChartJS
+         */
+
+
+        //-------------
+        //- PIE CHART -
+        //-------------
+        // Get context with jQuery - using jQuery's .get() method.
+        var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
+        var pieChart = new Chart(pieChartCanvas);
+        var PieData = [ 
+      {
+        value: 700,
+        color: "#f56954",
+        highlight: "#f56954",
+        label: "Route 1"
+      },
+      {
+        value: 500,
+        color: "#00a65a",
+        highlight: "#00a65a",
+        label: "Route 2"
+      },
+      {
+        value: 400,
+        color: "#f39c12",
+        highlight: "#f39c12",
+        label: "Route 3"
+      },
+      {
+        value: 600,
+        color: "#00c0ef",
+        highlight: "#00c0ef",
+        label: "Route 4"
+      },
+      {
+        value: 300,
+        color: "#3c8dbc",
+        highlight: "#3c8dbc",
+        label: "Route 5"
+      },
+      {
+        value: 100,
+        color: "#d2d6de",
+        highlight: "#d2d6de",
+        label: "Route 6"
+      },
+      {
+        value: 100,
+        color: "#3c6dbc",
+        highlight: "#3c6dbc",
+        label: "Route 7"
+       }
+    ];
+    var pieOptions = {
+      //Boolean - Whether we should show a stroke on each segment
+      segmentShowStroke: true,
+      //String - The colour of each segment stroke
+      segmentStrokeColor: "#fff",
+      //Number - The width of each segment stroke
+      segmentStrokeWidth: 2,
+      //Number - The percentage of the chart that we cut out of the middle
+      percentageInnerCutout: 50, // This is 0 for Pie charts
+      //Number - Amount of animation steps
+      animationSteps: 100,
+      //String - Animation easing effect
+      animationEasing: "easeOutBounce",
+      //Boolean - Whether we animate the rotation of the Doughnut
+      animateRotate: true,
+      //Boolean - Whether we animate scaling the Doughnut from the centre
+      animateScale: false,
+      //Boolean - whether to make the chart responsive to window resizing
+      responsive: true,
+      // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+      maintainAspectRatio: true,
+      //String - A legend template
+      legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
+    };
+    //Create pie or douhnut chart
+    // You can switch between pie and douhnut using the method below.
+    pieChart.Doughnut(PieData, pieOptions);
+
+
+  });
+</script>
+

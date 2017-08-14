@@ -1,0 +1,146 @@
+﻿@model IEnumerable<Project_MVC5.Models.ITEMS> 
+
+@using PagedList.Mvc;
+
+@{
+    /////////////////////////////////////////
+    //////////////////////////////////////// Check delete
+    ViewBag.Title = "Purchase GRN";
+    Layout = "~/Views/Shared/_SalesLayout.cshtml";
+
+}
+<link href="~/Content/datepicker3.css" rel="stylesheet" />
+
+<section class="content">
+
+    <div class="box box-success">
+
+
+        <div class="box-body">
+            <form class="form-horizontal" action="/PurchaseGRN/AddorEdit" method="post">
+
+                <div class="form-horizontal form-control-static ">
+
+
+                    <div class="form-group-sm form-inline form-control-static">
+
+                        <label class="control-label col-md-1">Name</label>
+                        @Html.DropDownList("Name_Item", (ViewBag.products as SelectList), "-- Please Select an Item  --", new { style = "width:250px", @class = "form-control col-md-12 " })
+
+                        <label class="control-label col-md-1">Quantity</label>
+                        <input type="text" class="form-control col-md-1" name="Add_Quantity" id="Add_Quantity" />
+                        
+                        <label class="control-label col-md-1">Free Items</label>
+                        <input type="text" class="form-control col-md-1" name="Free_Items" id="Free_Items" />
+                        
+                        <input type="hidden" name="StockId" id="StockId" />
+                    </div>
+
+
+                    <br /><br />
+                    <div class="form-group-sm form-inline form-control-static">
+
+                        
+                            <label class="control-label col-md-1">Cost Price</label>
+                            <input type="text" class="form-control col-md-1" name="COST_PRICE" id="COST_PRICE" />
+ 
+
+                            <label class="control-label col-md-1">Retail Price</label>
+                            <input type="text" class="form-control col-md-1" name="Retail_Margin" id="Retail_Margin" />
+
+                            <label class="control-label col-md-1">Discount</label>
+                            <input type="text" class="form-control col-md-1" name="Discount" id="Discount" />
+
+
+
+
+                        </div>
+
+                    </div>
+                <br /><br />
+                <input type="submit" value="SAVE" class="btn btn-danger text-center" />
+            </form>
+        </div>
+    </div>
+
+
+    <br /><br /><br />
+
+    <div class="box box-warning">
+
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+                <tr>
+
+                    <th>Item Name</th>
+                    <th>Code</th>
+                    <th>Type</th>
+                    <th>Stock</th>
+                    <th>Added</th>
+                    <th>Cost Price</th>
+                    <th>Retail_Margin</th>
+                    <th>Trade_Margin</th>
+
+                </tr>
+                <tbody>
+                    @if (Model != null)
+                    {
+
+                        foreach (var item in Model)
+                        {
+
+                            <tr class="main-data" data-id="@item.StockId">
+
+                                <td>@item.Name_Item</td>
+                                <td>@item.StockCode</td>
+                                <td>@item.Type</td>
+                                <td>@item.STOCK_LEVEL</td>
+                                <td>@item.Add_Quantity</td>
+                                <td>@item.COST_PRICE</td>
+                                <td>@item.Retail_Margin</td>
+                                <td>@item.Trade_Margin</td>
+                                <td>
+                                    <a href="/PurchaseGRN/Delete/@item.StockId">Delete</a>
+                                </td>
+                            </tr>
+
+                        }
+
+
+                    }
+
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</section>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap-datepicker.js"></script>
+
+<script>
+        function showedit(objects) {
+            var _this = $(objects).closest(".main-data");
+            $("#Name_Item").val(_this.find("td").eq(0).html());
+            $("#StockCode").val(_this.find("td").eq(1).html());
+            $("#Type").val(_this.find("td").eq(2).html());
+            $("#MIN_MIN_STOCK_LEVEL").val(_this.find("td").eq(3).html());
+            $("#COST_PRICE").val(_this.find("td").eq(4).html());
+            $("#Retail_Margin").val(_this.find("td").eq(5).html());
+            $("#Trade_Margin").val(_this.find("td").eq(6).html());
+            $("#StockId").val(_this.attr("data-id"));
+        }
+        //Date picker
+        $('#Date').datepicker({
+            autoclose: true
+        });
+
+</script>
+
+
+
+
+

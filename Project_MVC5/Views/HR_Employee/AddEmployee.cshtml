@@ -1,0 +1,57 @@
+﻿@model Project_MVC5.Models.tb_Employee
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Add Employees";
+    Layout = "~/Views/Shared/_SalesLayout.cshtml";
+}
+
+@* add new & edit*@
+<form class="form-horizontal" action="/HR_Employee/AddorEdit" method="post">
+
+    <div class="form-group">
+        <label class="control-label col-sm-4">Employee name</label>
+        <input type="text" class="form-control col-sm-6" name="Name_Employee" id="Name_Employee" />
+        <input type="hidden" name="ID_Employee" id="ID_Employee" />
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-4">Position</label>
+        <input type="text" class="form-control col-sm-6" name="Job_tile" id="Job_tile" />
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-4">Address</label>
+        <input type="text" class="form-control col-sm-6" name="Address_Employee" id="Address_Employee" />
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-4">Telephone</label>
+        <input type="text" class="form-control col-sm-6" name="Tel_Employee" id="Tel_Employee" />
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-4">Email</label>
+        <input type="text" class="form-control col-sm-6" name="email" id="email" />
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-4">Salary</label>
+        <input type="text" class="form-control col-sm-6" name="Salary" id="Salary" />
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-4">Date Joined</label>
+        <input type="text" class="form-control col-sm-6" name="Joining_Date" id="Joining_Date" />
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-4">Still Working</label>
+        <input type="checkbox" class="form-control col-sm-6" name="Still_working" id="Still_working" />
+    </div>
+    <input type="submit" value="SAVE" class="btn btn-danger text-center" />
+</form>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap-datepicker.js"></script>
+
+<script>
+    //Date picker
+    $('#Joining_Date').datepicker({
+        autoclose: true
+    });
+</script>
+

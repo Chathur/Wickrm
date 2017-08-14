@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Demo_onlineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_Cart">
+          <Key>
+            <PropertyRef Name="ID_Product" />
+          </Key>
+          <Property Name="ID_Product" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Product" Type="varchar" MaxLength="50" />
+          <Property Name="Price" Type="float" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Total" Type="float" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="tb_Customer">
+          <Key>
+            <PropertyRef Name="ID_Customer" />
+          </Key>
+          <Property Name="ID_Customer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Customer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Store_Customer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address_Customer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tel_Customer" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_order">
+          <Key>
+            <PropertyRef Name="ID_order" />
+          </Key>
+          <Property Name="ID_order" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code_Order" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name_Order" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type_Order" Type="nvarchar" MaxLength="50" />
+          <Property Name="Create_date" Type="datetime" />
+          <Property Name="Total_money" Type="float" />
+        </EntityType>
+        <EntityType Name="tb_order_detail">
+          <Key>
+            <PropertyRef Name="ID_orderDetails" />
+          </Key>
+          <Property Name="ID_orderDetails" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_order" Type="int" />
+          <Property Name="ID_Product" Type="int" />
+          <Property Name="Name_product" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Price" Type="float" />
+          <Property Name="Total_money" Type="float" />
+        </EntityType>
+        <EntityType Name="tb_Product">
+          <Key>
+            <PropertyRef Name="ID_Product" />
+          </Key>
+          <Property Name="ID_Product" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code_Product" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name_Product" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="float" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Description" Type="ntext" />
+        </EntityType>
+        <EntityType Name="tb_Sales">
+          <Key>
+            <PropertyRef Name="ID_Product" />
+          </Key>
+          <Property Name="ID_Product" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code_Product" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name_Product" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="Quantity" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Total" Type="float" StoreGeneratedPattern="Computed" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Employee" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bill_No" Type="int" Nullable="false" />
+          <Property Name="Customer" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tb_SalesOrder">
+          <Key>
+            <PropertyRef Name="ID_Product" />
+          </Key>
+          <Property Name="ID_Product" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code_Product" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name_Product" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="float" />
+          <Property Name="Quantity" Type="nchar" MaxLength="10" />
+          <Property Name="Total" Type="float" StoreGeneratedPattern="Computed" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Employee" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bill_No" Type="int" Nullable="false" />
+          <Property Name="Customer" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tb_Supplier">
+          <Key>
+            <PropertyRef Name="ID_Supplier" />
+          </Key>
+          <Property Name="ID_Supplier" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Supplier" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Store_Supplier" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address_Supplier" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tel_Supplier" Type="int" />
+        </EntityType>
+        <EntityContainer Name="Demo_onlineModelStoreContainer">
+          <EntitySet Name="tb_Cart" EntityType="Self.tb_Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Customer" EntityType="Self.tb_Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_order" EntityType="Self.tb_order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_order_detail" EntityType="Self.tb_order_detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Product" EntityType="Self.tb_Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Sales" EntityType="Self.tb_Sales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_SalesOrder" EntityType="Self.tb_SalesOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Supplier" EntityType="Self.tb_Supplier" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Demo_onlineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_order">
+          <Key>
+            <PropertyRef Name="ID_order" />
+          </Key>
+          <Property Name="ID_order" Type="Int32" Nullable="false" />
+          <Property Name="Code_Order" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name_Order" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type_Order" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Create_date" Type="DateTime" Precision="3" />
+          <Property Name="Total_money" Type="Double" />
+        </EntityType>
+        <EntityType Name="tb_Product">
+          <Key>
+            <PropertyRef Name="ID_Product" />
+          </Key>
+          <Property Name="ID_Product" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code_Product" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name_Product" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tb_order_detail">
+          <Key>
+            <PropertyRef Name="ID_orderDetails" />
+          </Key>
+          <Property Name="ID_orderDetails" Type="Int32" Nullable="false" />
+          <Property Name="ID_order" Type="Int32" />
+          <Property Name="ID_Product" Type="Int32" />
+          <Property Name="Name_product" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Total_money" Type="Double" />
+        </EntityType>
+        <EntityContainer Name="Demo_onlineEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_order" EntityType="Self.tb_order" />
+          <EntitySet Name="tb_Product" EntityType="Self.tb_Product" />
+          <EntitySet Name="tb_order_detail" EntityType="Self.tb_order_detail" />
+          <EntitySet Name="tb_Cart" EntityType="Demo_onlineModel.tb_Cart" />
+          <EntitySet Name="tb_Supplier" EntityType="Demo_onlineModel.tb_Supplier" />
+          <EntitySet Name="tb_SalesOrder" EntityType="Demo_onlineModel.tb_SalesOrder" />
+          <EntitySet Name="tb_Sales" EntityType="Demo_onlineModel.tb_Sales" />
+          <EntitySet Name="tb_Customer" EntityType="Demo_onlineModel.tb_Customer" />
+        </EntityContainer>
+        <EntityType Name="tb_Cart">
+          <Key>
+            <PropertyRef Name="ID_Product" />
+          </Key>
+          <Property Name="ID_Product" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Product" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Total" Type="Double" />
+        </EntityType>
+        <EntityType Name="tb_Supplier">
+          <Key>
+            <PropertyRef Name="ID_Supplier" />
+          </Key>
+          <Property Name="ID_Supplier" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Supplier" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Store_Supplier" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address_Supplier" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tel_Supplier" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tb_SalesOrder">
+          <Key>
+            <PropertyRef Name="ID_Product" />
+          </Key>
+          <Property Name="ID_Product" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code_Product" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name_Product" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Quantity" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Total" Type="Double" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Employee" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bill_No" Type="Int32" Nullable="false" />
+          <Property Name="Customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tb_Sales">
+          <Key>
+            <PropertyRef Name="ID_Product" />
+          </Key>
+          <Property Name="ID_Product" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code_Product" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name_Product" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Quantity" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Total" Type="Double" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Employee" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bill_No" Type="Int32" Nullable="false" />
+          <Property Name="Customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tb_Customer">
+          <Key>
+            <PropertyRef Name="ID_Customer" />
+          </Key>
+          <Property Name="ID_Customer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Customer" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Store_Customer" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address_Customer" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tel_Customer" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Demo_onlineModelStoreContainer" CdmEntityContainer="Demo_onlineEntities">
+          <EntitySetMapping Name="tb_order">
+            <EntityTypeMapping TypeName="Demo_onlineModel.tb_order">
+              <MappingFragment StoreEntitySet="tb_order">
+                <ScalarProperty Name="ID_order" ColumnName="ID_order" />
+                <ScalarProperty Name="Code_Order" ColumnName="Code_Order" />
+                <ScalarProperty Name="Name_Order" ColumnName="Name_Order" />
+                <ScalarProperty Name="Type_Order" ColumnName="Type_Order" />
+                <ScalarProperty Name="Create_date" ColumnName="Create_date" />
+                <ScalarProperty Name="Total_money" ColumnName="Total_money" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Product">
+            <EntityTypeMapping TypeName="Demo_onlineModel.tb_Product">
+              <MappingFragment StoreEntitySet="tb_Product">
+                <ScalarProperty Name="ID_Product" ColumnName="ID_Product" />
+                <ScalarProperty Name="Code_Product" ColumnName="Code_Product" />
+                <ScalarProperty Name="Name_Product" ColumnName="Name_Product" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_order_detail">
+            <EntityTypeMapping TypeName="Demo_onlineModel.tb_order_detail">
+              <MappingFragment StoreEntitySet="tb_order_detail">
+                <ScalarProperty Name="ID_orderDetails" ColumnName="ID_orderDetails" />
+                <ScalarProperty Name="ID_order" ColumnName="ID_order" />
+                <ScalarProperty Name="ID_Product" ColumnName="ID_Product" />
+                <ScalarProperty Name="Name_product" ColumnName="Name_product" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Total_money" ColumnName="Total_money" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Cart">
+            <EntityTypeMapping TypeName="Demo_onlineModel.tb_Cart">
+              <MappingFragment StoreEntitySet="tb_Cart">
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Name_Product" ColumnName="Name_Product" />
+                <ScalarProperty Name="ID_Product" ColumnName="ID_Product" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Supplier">
+            <EntityTypeMapping TypeName="Demo_onlineModel.tb_Supplier">
+              <MappingFragment StoreEntitySet="tb_Supplier">
+                <ScalarProperty Name="Tel_Supplier" ColumnName="Tel_Supplier" />
+                <ScalarProperty Name="Address_Supplier" ColumnName="Address_Supplier" />
+                <ScalarProperty Name="Store_Supplier" ColumnName="Store_Supplier" />
+                <ScalarProperty Name="Name_Supplier" ColumnName="Name_Supplier" />
+                <ScalarProperty Name="ID_Supplier" ColumnName="ID_Supplier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_SalesOrder">
+            <EntityTypeMapping TypeName="Demo_onlineModel.tb_SalesOrder">
+              <MappingFragment StoreEntitySet="tb_SalesOrder">
+                <ScalarProperty Name="Customer" ColumnName="Customer" />
+                <ScalarProperty Name="Bill_No" ColumnName="Bill_No" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Name_Product" ColumnName="Name_Product" />
+                <ScalarProperty Name="Code_Product" ColumnName="Code_Product" />
+                <ScalarProperty Name="ID_Product" ColumnName="ID_Product" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Sales">
+            <EntityTypeMapping TypeName="Demo_onlineModel.tb_Sales">
+              <MappingFragment StoreEntitySet="tb_Sales">
+                <ScalarProperty Name="Customer" ColumnName="Customer" />
+                <ScalarProperty Name="Bill_No" ColumnName="Bill_No" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Name_Product" ColumnName="Name_Product" />
+                <ScalarProperty Name="Code_Product" ColumnName="Code_Product" />
+                <ScalarProperty Name="ID_Product" ColumnName="ID_Product" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Customer">
+            <EntityTypeMapping TypeName="Demo_onlineModel.tb_Customer">
+              <MappingFragment StoreEntitySet="tb_Customer">
+                <ScalarProperty Name="Tel_Customer" ColumnName="Tel_Customer" />
+                <ScalarProperty Name="Address_Customer" ColumnName="Address_Customer" />
+                <ScalarProperty Name="Store_Customer" ColumnName="Store_Customer" />
+                <ScalarProperty Name="Name_Customer" ColumnName="Name_Customer" />
+                <ScalarProperty Name="ID_Customer" ColumnName="ID_Customer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

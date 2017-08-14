@@ -1,0 +1,212 @@
+﻿@model IEnumerable<Project_MVC5.Models.tb_SalesOrder>
+
+
+@{
+    ViewBag.Title = "SalesOrder";
+    Layout = "~/Views/Shared/_SalesLayout.cshtml";
+
+    var Bill_No = 0;
+    var Sales_Order_Id = 0;
+    var Customer = "";
+    DateTime Date = DateTime.Now;
+    var Employee = "";
+    var route = ViewBag.route;
+
+    if (Model != null)
+    {
+        var list = Model.ToList();
+        for (int i = 0; i < list.Count(); i++)
+        {
+            Sales_Order_Id = list[i].Sales_order_id;
+            Bill_No = list[i].Bill_No;
+            Customer = list[i].Customer;
+            Date = list[i].Date;
+            Employee = list[i].Employee;
+        }
+    }
+ }
+
+@* add new & edit*@
+
+<section class="content">
+     <form class="form-horizontal" action="/Sales_SalesOrder/AddorEdit" method="post">
+        <div class="box box-info">
+            <div class="box-body">
+                <div class="form-horizontal form-control-static">
+                    <div class="form-group-sm form-inline form-control-static">
+                        <div>
+                            @Html.Label("Route")
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            
+                            @Html.DropDownList("Route", (ViewBag.route as SelectList), "-- Please Select a Route  --", new { style = "width:250px", @class = "form-control col-md-push-12 bg-gray-light" }) 
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                          <b>@Sales_Order_Id</b>  
+
+                        </div>
+                       <br />   
+                        @Html.Label("Customer")
+                        
+                        @Html.DropDownList("Customer", (ViewBag.customer as SelectList), @Customer, new { style = "width:250px", @class = "form-control col-md-push-12 bg-gray-light" })
+
+                       <input type="hidden" name="SearchButton" id="SearchButton" value="@Customer" />
+                       
+                       <label class="control-label col-md-push-12">Bill No</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                       <input type="text" class="form-control col-md-push-12 bg-gray-light" name="Bill_No" id="Bill_No" value="@Bill_No" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                       <label class="control-label col-md-push-12">Date</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                       <input type="text" class="form-control col-md-push-12 bg-gray-light" name="Date" id="Date" value="@Date" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                       <label class="control-label col-md-push-12">Employee</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                       <input type="text" class="form-control col-md-push-12 bg-gray-light" name="Employee" id="Employee" value="@Employee" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <br /><br />
+
+        <div class="box box-success">
+
+            <div class="box-body">
+
+                <div class="form-group-sm form-inline">
+                    <label class="control-label col-md-1">Product Name</label>
+                    @Html.DropDownList("Name_Product", (ViewBag.products as SelectList), "-- Please Select an Item  --", new { style = "width:250px", @class = "form-control col-md-12 " })
+
+                    <label class="control-label col-md-1">Quantity</label>
+                    <input type="text" class="form-control col-md-1" name="Quantity" id="Quantity" />
+
+
+                </div>
+
+                <div class="form-horizontal">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="ADD" class="btn btn-success text-center" />
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+    <br /><br /><br />
+    <div class="box box-warning">
+
+        <div class="box-body table-responsive no-padding">
+
+            <table class="table table-hover" >
+                <tr>
+                    <th>Bill No</th>
+                    <th>Date</th>
+                    <th>employee</th>
+                    <th>customer</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>quantity</th>
+                    <th>Total</th>
+
+                </tr>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        double sum = 0;
+                        foreach (var item in Model)
+                        {
+                            if (Bill_No == item.Bill_No)
+                            {
+                                Customer = item.Customer;
+                                
+                                sum += (double)item.Total;
+                                <tr class="main-data" data-id="@item.item_id" data-bill="@item.Bill_No" data-date="@item.Date" data-emp="@item.Employee" data-cus="@item.Customer">
+                                    <td>@item.Bill_No</td>
+                                    <td>@item.Date</td>
+                                    <td>@item.Employee</td>
+                                    <td>@item.Customer</td>
+                                    <td>@item.Name_Product</td>
+                                    <td>@item.Price</td>
+                                    <td>@item.Quantity</td>
+                                    <td>@item.Total</td>
+                                    <td>
+                                        <a href="/Sales_SalesOrder/Delete/@item.Sales_order_id">Delete</a> 
+                                    </td>
+                                </tr>
+                            }
+
+
+                        }
+
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+
+                            <th>Net Total : @sum</th>
+                        </tr>
+                    }
+
+
+                </tbody>
+
+            </table>
+            </div>
+        </div>
+</section>
+
+
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script>
+        function showedit(objects) {
+            var _this = $(objects).closest(".main-data");
+            $("#Name_Product").val(_this.find("td").eq(4).html());
+            $("#Price").val(_this.find("td").eq(4).html());
+            $("#Quantity").val(_this.find("td").eq(6).html());
+            $("#ID_Product").val(_this.attr("data-id"));
+            $("#Bill_No").val(_this.attr("data-bill"));
+            $("#Date").val(_this.attr("data-date"));
+            $("#Employee").val(_this.attr("data-emp"));
+            $("#Customer").val(_this.attr("data-cus"));
+        }
+        //Date picker
+        $('#Date').datepicker({
+            autoclose: true
+        });
+
+
+    </script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        //Country Dropdown Selectedchange event
+        $("#Route").change(function () {
+            $("#Customer").empty();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetCustomers")', // Calling json method
+                dataType: 'json',
+                data: { id: $("#Route").val() },
+                // Get Selected Country ID.
+
+                success: function (customers) {
+                    $.each(customers, function (i, customer) {
+                        $("#Customer").append('<option value="' + customer.Value + '">' +
+                             customer.Text + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+            return false;
+        })
+    });
+</script>
+
+
+

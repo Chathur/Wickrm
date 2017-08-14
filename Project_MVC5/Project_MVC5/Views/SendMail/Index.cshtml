@@ -1,0 +1,24 @@
+﻿@model Project_MVC5.Models.ContactModel
+@{
+    ViewBag.Title = "test Email";
+    Layout = "~/Views/Shared/_SalesLayout.cshtml";
+}
+
+<section id="loginForm">
+    <h2>Test Form</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Form</legend>
+            @Html.EditorForModel()
+            <input type="submit" value="Submit"/>
+        </fieldset>
+
+    }
+</section>
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    }

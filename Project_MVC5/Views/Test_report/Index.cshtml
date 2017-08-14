@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_SalesLayout.cshtml";
+}
+
+<h2>Index</h2>
+<a href="@Url.Action("ShowSimple","Test_report")">Export Report</a>
+<h2>Report from MVC</h2>
+<script type="text/javascript">
+function SimpleInNewWin() {
+    window.open("../Test_report/ShowSimple");// calling action
+}
+ 
+</script>
+<h2>Report Using ASP.net Web Forms</h2>
+ 
+<h3>Simple Report</h3>
+@using (Html.BeginForm("ShowSimple", "Test_report"))
+{
+<input type="submit" value="Show simple" />
+<input type="button" value="Show simple in New Window" onclick="SimpleInNewWin()"/>
+<br />
+}
+

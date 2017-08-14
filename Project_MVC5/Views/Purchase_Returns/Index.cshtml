@@ -1,0 +1,53 @@
+﻿@model Project_MVC5.Models.tb_PurchaseReturns
+@{
+    ViewBag.Title = "Sales Returns";
+    Layout = "~/Views/Shared/_SalesLayout.cshtml";
+}
+<link href="~/Content/datepicker3.css" rel="stylesheet" />
+
+<section class="content">
+    <div class="box box-info">
+
+
+        <div class="box-body">
+
+            <form class="form-horizontal" action="/Purchase_Returns/AddorEdit/" method="post">
+
+                <div class="form-horizontal form-control-static">
+
+                    <div class="form-group-sm form-inline form-control-static">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label class="control-label col-md-push-12">Bill No</label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="form-control col-md-push-12 " name="Bill_No" id="Bill_No" />
+                    </div>
+
+                    <div class="form-group-sm form-inline form-control-static">
+                        <label class="control-label col-md-1">Item Name</label>
+                        @Html.DropDownList("Name_Item", (ViewBag.products as SelectList), "-- Please Select an Item  --", new { style = "width:250px", @class = "form-control col-md-12 " })
+
+                        <label class="control-label col-md-1">Quantity</label>
+                        <input type="text" class="form-control col-md-push-12 " name="Quantity" id="Quantity" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <label class="control-label col-md-push-12">Date</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" class="form-control col-md-push-12 " name="Date_Returned" id="Date_Returned" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    </div>
+
+
+                </div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Save" class="btn btn-success text-center" />
+            </form>
+        </div>
+    </div>
+</section>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap-datepicker.js"></script>
+<script>
+        //Date picker
+    $('#Date_Returned').datepicker({
+            autoclose: true
+        });
+
+
+</script>

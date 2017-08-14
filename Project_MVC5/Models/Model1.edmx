@@ -1,0 +1,751 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WICKRAMA_STORESModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ITEMS">
+          <Key>
+            <PropertyRef Name="StockId" />
+          </Key>
+          <Property Name="StockId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StockCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name_Item" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type_Id" Type="int" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="COST_PRICE" Type="float" Nullable="false" />
+          <Property Name="STOCK_LEVEL" Type="int" Nullable="false" />
+          <Property Name="MIN_MIN_STOCK_LEVEL" Type="int" />
+          <Property Name="VendorId" Type="int" />
+          <Property Name="Vendor_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Retail_Margin" Type="float" Nullable="false" />
+          <Property Name="Trade_Margin" Type="float" Nullable="false" />
+          <Property Name="Add_Quantity" Type="float" />
+          <Property Name="Discount" Type="float" />
+          <Property Name="Free_Items" Type="int" />
+        </EntityType>
+        <EntityType Name="PaymentTerms">
+          <Key>
+            <PropertyRef Name="PaymentTermsId" />
+          </Key>
+          <Property Name="PaymentTermsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PaymentDays" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Route">
+          <Key>
+            <PropertyRef Name="Route_id" />
+          </Key>
+          <Property Name="Route_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="City" Type="nvarchar" MaxLength="100" />
+          <Property Name="Emoloyee" Type="int" />
+          <Property Name="Route_desc" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tb_Cart">
+          <Key>
+            <PropertyRef Name="ITEM_ID" />
+          </Key>
+          <Property Name="ITEM_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="STOCK_CODE" Type="int" />
+          <Property Name="QUANTITY" Type="real" />
+          <Property Name="ORDER_NO" Type="int" />
+          <Property Name="UNIT_PRICE" Type="float" Nullable="false" />
+          <Property Name="BUY_PRICE" Type="float" Nullable="false" />
+          <Property Name="StatusId" Type="int" />
+          <Property Name="Total" Type="float" StoreGeneratedPattern="Computed" />
+          <Property Name="Name_Product" Type="nvarchar" MaxLength="50" />
+          <Property Name="Bill_No" Type="int" />
+          <Property Name="Route" Type="nvarchar" MaxLength="50" />
+          <Property Name="sales_id" Type="nchar" MaxLength="10" />
+          <Property Name="Discount" Type="nchar" MaxLength="10" />
+          <Property Name="Code_Product" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="tb_Customer">
+          <Key>
+            <PropertyRef Name="ID_Customer" />
+          </Key>
+          <Property Name="ID_Customer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Customer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address_Customer" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreditLimit" Type="money" />
+          <Property Name="Tel_Customer" Type="nchar" MaxLength="10" />
+          <Property Name="Route_Customer" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Employee">
+          <Key>
+            <PropertyRef Name="ID_Employee" />
+          </Key>
+          <Property Name="ID_Employee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Employee" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address_Employee" Type="nchar" MaxLength="150" Nullable="false" />
+          <Property Name="Tel_Employee" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="email" Type="nchar" MaxLength="50" />
+          <Property Name="Job_tile" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Salary" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Joining_Date" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="Still_working" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_PurchaseReturns">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bill_No" Type="int" Nullable="false" />
+          <Property Name="Name_Item" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Date_Returned" Type="date" />
+        </EntityType>
+        <EntityType Name="tb_Sales">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sales_id" Type="int" />
+          <Property Name="item_id" Type="int" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="Discount" Type="money" Nullable="false" />
+          <Property Name="Code_Product" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name_Product" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Total" Type="float" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Employee" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bill_No" Type="int" Nullable="false" />
+          <Property Name="Customer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Route" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tb_SalesOrder">
+          <Key>
+            <PropertyRef Name="Sales_order_id" />
+          </Key>
+          <Property Name="Sales_order_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Employee" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Delivery_date" Type="date" />
+          <Property Name="Customer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bill_No" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="item_id" Type="int" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="Discount" Type="money" />
+          <Property Name="Code_Product" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name_Product" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Total" Type="float" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="Route" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tb_SalesReturns">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bill_No" Type="int" Nullable="false" />
+          <Property Name="Name_Item" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Date_Returned" Type="date" />
+        </EntityType>
+        <EntityType Name="tb_Supplier">
+          <Key>
+            <PropertyRef Name="ID_Supplier" />
+          </Key>
+          <Property Name="ID_Supplier" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Supplier" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Store_Supplier" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address_Supplier" Type="nvarchar" MaxLength="50" />
+          <Property Name="ADDRESS_3" Type="nvarchar" MaxLength="50" />
+          <Property Name="TOWN" Type="nvarchar" MaxLength="50" />
+          <Property Name="COUNTY" Type="nvarchar" MaxLength="50" />
+          <Property Name="POST_CODE" Type="nvarchar" MaxLength="10" />
+          <Property Name="COUNTRY" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tel_Supplier" Type="nvarchar" MaxLength="20" />
+          <Property Name="FAX_NO" Type="nvarchar" MaxLength="20" />
+          <Property Name="CONTACT_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="CONTACT_TEL" Type="nvarchar" MaxLength="20" />
+          <Property Name="CONTACT_FAX" Type="nvarchar" MaxLength="20" />
+          <Property Name="CONTACT_EMAIL" Type="nvarchar" MaxLength="50" />
+          <Property Name="WEB_ADDRESS" Type="nvarchar" MaxLength="50" />
+          <Property Name="ACCOUNT_NO" Type="nvarchar" MaxLength="20" />
+          <Property Name="CREDIT_ACCOUNT" Type="bit" />
+          <Property Name="NOTES" Type="ntext" />
+          <Property Name="CreditLimit" Type="money" />
+          <Property Name="PaymentTermsId" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Employee_id" Type="int" />
+        </EntityType>
+        <Association Name="FK_Route_tb_Employee">
+          <End Role="tb_Employee" Type="Self.tb_Employee" Multiplicity="0..1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Employee">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="Emoloyee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Customer_tb_Customer">
+          <End Role="Route" Type="Self.Route" Multiplicity="1" />
+          <End Role="tb_Customer" Type="Self.tb_Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="Route_id" />
+            </Principal>
+            <Dependent Role="tb_Customer">
+              <PropertyRef Name="Route_Customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Employee_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="tb_Employee" Type="Self.tb_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tb_Employee">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENDORS_PaymentTerms">
+          <End Role="PaymentTerms" Type="Self.PaymentTerms" Multiplicity="0..1" />
+          <End Role="tb_Supplier" Type="Self.tb_Supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentTerms">
+              <PropertyRef Name="PaymentTermsId" />
+            </Principal>
+            <Dependent Role="tb_Supplier">
+              <PropertyRef Name="PaymentTermsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WICKRAMA_STORESModelStoreContainer">
+          <EntitySet Name="ITEMS" EntityType="Self.ITEMS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentTerms" EntityType="Self.PaymentTerms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Route" EntityType="Self.Route" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Cart" EntityType="Self.tb_Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Customer" EntityType="Self.tb_Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Employee" EntityType="Self.tb_Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_PurchaseReturns" EntityType="Self.tb_PurchaseReturns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Sales" EntityType="Self.tb_Sales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_SalesOrder" EntityType="Self.tb_SalesOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_SalesReturns" EntityType="Self.tb_SalesReturns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Supplier" EntityType="Self.tb_Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Route_tb_Employee" Association="Self.FK_Route_tb_Employee">
+            <End Role="tb_Employee" EntitySet="tb_Employee" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Customer_tb_Customer" Association="Self.FK_tb_Customer_tb_Customer">
+            <End Role="Route" EntitySet="Route" />
+            <End Role="tb_Customer" EntitySet="tb_Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Employee_Users" Association="Self.FK_tb_Employee_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="tb_Employee" EntitySet="tb_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENDORS_PaymentTerms" Association="Self.FK_VENDORS_PaymentTerms">
+            <End Role="PaymentTerms" EntitySet="PaymentTerms" />
+            <End Role="tb_Supplier" EntitySet="tb_Supplier" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WICKRAMA_STORESModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ITEMS">
+          <Key>
+            <PropertyRef Name="StockId" />
+          </Key>
+          <Property Name="StockId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StockCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name_Item" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type_Id" Type="Int32" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="COST_PRICE" Type="Double" Nullable="false" />
+          <Property Name="STOCK_LEVEL" Type="Int32" Nullable="false" />
+          <Property Name="MIN_MIN_STOCK_LEVEL" Type="Int32" />
+          <Property Name="VendorId" Type="Int32" />
+          <Property Name="Vendor_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Retail_Margin" Type="Double" Nullable="false" />
+          <Property Name="Trade_Margin" Type="Double" Nullable="false" />
+          <Property Name="Add_Quantity" Type="Double" />
+          <Property Name="Discount" Type="Double" />
+          <Property Name="Free_Items" Type="Int32" />
+        </EntityType>
+        <EntityType Name="PaymentTerms">
+          <Key>
+            <PropertyRef Name="PaymentTermsId" />
+          </Key>
+          <Property Name="PaymentTermsId" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Description" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="PaymentDays" Nullable="false" Type="Int32" />
+          <NavigationProperty Name="tb_Supplier" Relationship="Self.FK_VENDORS_PaymentTerms" FromRole="PaymentTerms" ToRole="tb_Supplier" />
+        </EntityType>
+        <EntityType Name="Route">
+          <Key>
+            <PropertyRef Name="Route_id" />
+          </Key>
+          <Property Name="Route_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Emoloyee" Type="Int32" />
+          <Property Name="Route_desc" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="tb_Employee" Relationship="Self.FK_Route_tb_Employee" FromRole="Route" ToRole="tb_Employee" />
+          <NavigationProperty Name="tb_Customer" Relationship="Self.FK_tb_Customer_tb_Customer" FromRole="Route" ToRole="tb_Customer" />
+        </EntityType>
+        <EntityType Name="tb_Cart">
+          <Key>
+            <PropertyRef Name="ITEM_ID" />
+          </Key>
+          <Property Name="ITEM_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="STOCK_CODE" Type="Int32" />
+          <Property Name="QUANTITY" Type="Single" />
+          <Property Name="ORDER_NO" Type="Int32" />
+          <Property Name="UNIT_PRICE" Type="Double" Nullable="false" />
+          <Property Name="BUY_PRICE" Type="Double" Nullable="false" />
+          <Property Name="StatusId" Type="Int32" />
+          <Property Name="Total" Type="Double" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Name_Product" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bill_No" Type="Int32" />
+          <Property Name="Route" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sales_id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Discount" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Code_Product" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tb_Customer">
+          <Key>
+            <PropertyRef Name="ID_Customer" />
+          </Key>
+          <Property Name="ID_Customer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address_Customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreditLimit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Tel_Customer" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Route_Customer" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Route" Relationship="Self.FK_tb_Customer_tb_Customer" FromRole="tb_Customer" ToRole="Route" />
+        </EntityType>
+        <EntityType Name="tb_Employee">
+          <Key>
+            <PropertyRef Name="ID_Employee" />
+          </Key>
+          <Property Name="ID_Employee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Employee" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Address_Employee" Type="String" MaxLength="150" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Tel_Employee" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Job_tile" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Salary" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Joining_Date" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="Still_working" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Route" Relationship="Self.FK_Route_tb_Employee" FromRole="tb_Employee" ToRole="Route" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_tb_Employee_Users" FromRole="tb_Employee" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="tb_PurchaseReturns">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Bill_No" Type="Int32" Nullable="false" />
+          <Property Name="Name_Item" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Date_Returned" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="tb_Sales">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sales_id" Type="Int32" />
+          <Property Name="item_id" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Discount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Code_Product" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name_Product" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Total" Type="Double" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Employee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Bill_No" Type="Int32" Nullable="false" />
+          <Property Name="Customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Route" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tb_SalesOrder">
+          <Key>
+            <PropertyRef Name="Sales_order_id" />
+          </Key>
+          <Property Name="Sales_order_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Employee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Delivery_date" Type="DateTime" Precision="0" />
+          <Property Name="Customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Bill_No" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="item_id" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Discount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Code_Product" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name_Product" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Total" Type="Double" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Route" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tb_SalesReturns">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Bill_No" Type="Int32" Nullable="false" />
+          <Property Name="Name_Item" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Date_Returned" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="tb_Supplier">
+          <Key>
+            <PropertyRef Name="ID_Supplier" />
+          </Key>
+          <Property Name="ID_Supplier" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Supplier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Store_Supplier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address_Supplier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ADDRESS_3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TOWN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="COUNTY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="POST_CODE" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="COUNTRY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tel_Supplier" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FAX_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CONTACT_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CONTACT_TEL" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CONTACT_FAX" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CONTACT_EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WEB_ADDRESS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ACCOUNT_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CREDIT_ACCOUNT" Type="Boolean" />
+          <Property Name="NOTES" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreditLimit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PaymentTermsId" Type="Int32" />
+          <NavigationProperty Name="PaymentTerms" Relationship="Self.FK_VENDORS_PaymentTerms" FromRole="tb_Supplier" ToRole="PaymentTerms" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Employee_id" Type="Int32" />
+          <NavigationProperty Name="tb_Employee" Relationship="Self.FK_tb_Employee_Users" FromRole="Users" ToRole="tb_Employee" />
+        </EntityType>
+        <Association Name="FK_VENDORS_PaymentTerms">
+          <End Type="Self.PaymentTerms" Multiplicity="0..1" Role="PaymentTerms" />
+          <End Type="Self.tb_Supplier" Multiplicity="*" Role="tb_Supplier" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentTerms">
+              <PropertyRef Name="PaymentTermsId" />
+            </Principal>
+            <Dependent Role="tb_Supplier">
+              <PropertyRef Name="PaymentTermsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Route_tb_Employee">
+          <End Role="tb_Employee" Type="Self.tb_Employee" Multiplicity="0..1" />
+          <End Role="Route" Type="Self.Route" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Employee">
+              <PropertyRef Name="ID_Employee" />
+            </Principal>
+            <Dependent Role="Route">
+              <PropertyRef Name="Emoloyee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Customer_tb_Customer">
+          <End Role="Route" Type="Self.Route" Multiplicity="1" />
+          <End Role="tb_Customer" Type="Self.tb_Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="Route_id" />
+            </Principal>
+            <Dependent Role="tb_Customer">
+              <PropertyRef Name="Route_Customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_Employee_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="tb_Employee" Type="Self.tb_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tb_Employee">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WICKRAMA_STORESEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ITEMS" EntityType="Self.ITEMS" />
+          <EntitySet Name="PaymentTerms" EntityType="Self.PaymentTerms" />
+          <EntitySet Name="Route" EntityType="Self.Route" />
+          <EntitySet Name="tb_Cart" EntityType="Self.tb_Cart" />
+          <EntitySet Name="tb_Customer" EntityType="Self.tb_Customer" />
+          <EntitySet Name="tb_Employee" EntityType="Self.tb_Employee" />
+          <EntitySet Name="tb_PurchaseReturns" EntityType="Self.tb_PurchaseReturns" />
+          <EntitySet Name="tb_Sales" EntityType="Self.tb_Sales" />
+          <EntitySet Name="tb_SalesOrder" EntityType="Self.tb_SalesOrder" />
+          <EntitySet Name="tb_SalesReturns" EntityType="Self.tb_SalesReturns" />
+          <EntitySet Name="tb_Supplier" EntityType="Self.tb_Supplier" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_VENDORS_PaymentTerms" Association="Self.FK_VENDORS_PaymentTerms">
+            <End EntitySet="PaymentTerms" Role="PaymentTerms" />
+            <End EntitySet="tb_Supplier" Role="tb_Supplier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Route_tb_Employee" Association="Self.FK_Route_tb_Employee">
+            <End Role="tb_Employee" EntitySet="tb_Employee" />
+            <End Role="Route" EntitySet="Route" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Customer_tb_Customer" Association="Self.FK_tb_Customer_tb_Customer">
+            <End Role="Route" EntitySet="Route" />
+            <End Role="tb_Customer" EntitySet="tb_Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_Employee_Users" Association="Self.FK_tb_Employee_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="tb_Employee" EntitySet="tb_Employee" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WICKRAMA_STORESModelStoreContainer" CdmEntityContainer="WICKRAMA_STORESEntities">
+          <EntitySetMapping Name="ITEMS">
+            <EntityTypeMapping TypeName="WICKRAMA_STORESModel.ITEMS">
+              <MappingFragment StoreEntitySet="ITEMS">
+                <ScalarProperty Name="StockId" ColumnName="StockId" />
+                <ScalarProperty Name="StockCode" ColumnName="StockCode" />
+                <ScalarProperty Name="Name_Item" ColumnName="Name_Item" />
+                <ScalarProperty Name="Type_Id" ColumnName="Type_Id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="COST_PRICE" ColumnName="COST_PRICE" />
+                <ScalarProperty Name="STOCK_LEVEL" ColumnName="STOCK_LEVEL" />
+                <ScalarProperty Name="MIN_MIN_STOCK_LEVEL" ColumnName="MIN_MIN_STOCK_LEVEL" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="Vendor_Name" ColumnName="Vendor_Name" />
+                <ScalarProperty Name="Retail_Margin" ColumnName="Retail_Margin" />
+                <ScalarProperty Name="Trade_Margin" ColumnName="Trade_Margin" />
+                <ScalarProperty Name="Add_Quantity" ColumnName="Add_Quantity" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Free_Items" ColumnName="Free_Items" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentTerms">
+            <EntityTypeMapping TypeName="WICKRAMA_STORESModel.PaymentTerms">
+              <MappingFragment StoreEntitySet="PaymentTerms">
+                <ScalarProperty Name="PaymentTermsId" ColumnName="PaymentTermsId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PaymentDays" ColumnName="PaymentDays" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Route">
+            <EntityTypeMapping TypeName="WICKRAMA_STORESModel.Route">
+              <MappingFragment StoreEntitySet="Route">
+                <ScalarProperty Name="Route_id" ColumnName="Route_id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Emoloyee" ColumnName="Emoloyee" />
+                <ScalarProperty Name="Route_desc" ColumnName="Route_desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Cart">
+            <EntityTypeMapping TypeName="WICKRAMA_STORESModel.tb_Cart">
+              <MappingFragment StoreEntitySet="tb_Cart">
+                <ScalarProperty Name="ITEM_ID" ColumnName="ITEM_ID" />
+                <ScalarProperty Name="STOCK_CODE" ColumnName="STOCK_CODE" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="ORDER_NO" ColumnName="ORDER_NO" />
+                <ScalarProperty Name="UNIT_PRICE" ColumnName="UNIT_PRICE" />
+                <ScalarProperty Name="BUY_PRICE" ColumnName="BUY_PRICE" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Name_Product" ColumnName="Name_Product" />
+                <ScalarProperty Name="Bill_No" ColumnName="Bill_No" />
+                <ScalarProperty Name="Route" ColumnName="Route" />
+                <ScalarProperty Name="sales_id" ColumnName="sales_id" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Code_Product" ColumnName="Code_Product" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Customer">
+            <EntityTypeMapping TypeName="WICKRAMA_STORESModel.tb_Customer">
+              <MappingFragment StoreEntitySet="tb_Customer">
+                <ScalarProperty Name="ID_Customer" ColumnName="ID_Customer" />
+                <ScalarProperty Name="Name_Customer" ColumnName="Name_Customer" />
+                <ScalarProperty Name="Address_Customer" ColumnName="Address_Customer" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CreditLimit" ColumnName="CreditLimit" />
+                <ScalarProperty Name="Tel_Customer" ColumnName="Tel_Customer" />
+                <ScalarProperty Name="Route_Customer" ColumnName="Route_Customer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Employee">
+            <EntityTypeMapping TypeName="WICKRAMA_STORESModel.tb_Employee">
+              <MappingFragment StoreEntitySet="tb_Employee">
+                <ScalarProperty Name="ID_Employee" ColumnName="ID_Employee" />
+                <ScalarProperty Name="Name_Employee" ColumnName="Name_Employee" />
+                <ScalarProperty Name="Address_Employee" ColumnName="Address_Employee" />
+                <ScalarProperty Name="Tel_Employee" ColumnName="Tel_Employee" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Job_tile" ColumnName="Job_tile" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Joining_Date" ColumnName="Joining_Date" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="Still_working" ColumnName="Still_working" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_PurchaseReturns">
+            <EntityTypeMapping TypeName="WICKRAMA_STORESModel.tb_PurchaseReturns">
+              <MappingFragment StoreEntitySet="tb_PurchaseReturns">
+                <ScalarProperty Name="Date_Returned" ColumnName="Date_Returned" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Bill_No" ColumnName="Bill_No" />
+                <ScalarProperty Name="Name_Item" ColumnName="Name_Item" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Sales">
+            <EntityTypeMapping TypeName="WICKRAMA_STORESModel.tb_Sales">
+              <MappingFragment StoreEntitySet="tb_Sales">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="sales_id" ColumnName="sales_id" />
+                <ScalarProperty Name="item_id" ColumnName="item_id" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Code_Product" ColumnName="Code_Product" />
+                <ScalarProperty Name="Name_Product" ColumnName="Name_Product" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="Bill_No" ColumnName="Bill_No" />
+                <ScalarProperty Name="Customer" ColumnName="Customer" />
+                <ScalarProperty Name="Route" ColumnName="Route" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_SalesOrder">
+            <EntityTypeMapping TypeName="WICKRAMA_STORESModel.tb_SalesOrder">
+              <MappingFragment StoreEntitySet="tb_SalesOrder">
+                <ScalarProperty Name="Sales_order_id" ColumnName="Sales_order_id" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="Delivery_date" ColumnName="Delivery_date" />
+                <ScalarProperty Name="Customer" ColumnName="Customer" />
+                <ScalarProperty Name="Bill_No" ColumnName="Bill_No" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="item_id" ColumnName="item_id" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Code_Product" ColumnName="Code_Product" />
+                <ScalarProperty Name="Name_Product" ColumnName="Name_Product" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Route" ColumnName="Route" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_SalesReturns">
+            <EntityTypeMapping TypeName="WICKRAMA_STORESModel.tb_SalesReturns">
+              <MappingFragment StoreEntitySet="tb_SalesReturns">
+                <ScalarProperty Name="Date_Returned" ColumnName="Date_Returned" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Bill_No" ColumnName="Bill_No" />
+                <ScalarProperty Name="Name_Item" ColumnName="Name_Item" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Supplier">
+            <EntityTypeMapping TypeName="WICKRAMA_STORESModel.tb_Supplier">
+              <MappingFragment StoreEntitySet="tb_Supplier">
+                <ScalarProperty Name="ID_Supplier" ColumnName="ID_Supplier" />
+                <ScalarProperty Name="Name_Supplier" ColumnName="Name_Supplier" />
+                <ScalarProperty Name="Store_Supplier" ColumnName="Store_Supplier" />
+                <ScalarProperty Name="Address_Supplier" ColumnName="Address_Supplier" />
+                <ScalarProperty Name="ADDRESS_3" ColumnName="ADDRESS_3" />
+                <ScalarProperty Name="TOWN" ColumnName="TOWN" />
+                <ScalarProperty Name="COUNTY" ColumnName="COUNTY" />
+                <ScalarProperty Name="POST_CODE" ColumnName="POST_CODE" />
+                <ScalarProperty Name="COUNTRY" ColumnName="COUNTRY" />
+                <ScalarProperty Name="Tel_Supplier" ColumnName="Tel_Supplier" />
+                <ScalarProperty Name="FAX_NO" ColumnName="FAX_NO" />
+                <ScalarProperty Name="CONTACT_NAME" ColumnName="CONTACT_NAME" />
+                <ScalarProperty Name="CONTACT_TEL" ColumnName="CONTACT_TEL" />
+                <ScalarProperty Name="CONTACT_FAX" ColumnName="CONTACT_FAX" />
+                <ScalarProperty Name="CONTACT_EMAIL" ColumnName="CONTACT_EMAIL" />
+                <ScalarProperty Name="WEB_ADDRESS" ColumnName="WEB_ADDRESS" />
+                <ScalarProperty Name="ACCOUNT_NO" ColumnName="ACCOUNT_NO" />
+                <ScalarProperty Name="CREDIT_ACCOUNT" ColumnName="CREDIT_ACCOUNT" />
+                <ScalarProperty Name="NOTES" ColumnName="NOTES" />
+                <ScalarProperty Name="CreditLimit" ColumnName="CreditLimit" />
+                <ScalarProperty Name="PaymentTermsId" ColumnName="PaymentTermsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="WICKRAMA_STORESModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Employee_id" ColumnName="Employee_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

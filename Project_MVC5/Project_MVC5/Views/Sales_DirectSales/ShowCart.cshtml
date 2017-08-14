@@ -1,0 +1,103 @@
+﻿@model IEnumerable<Project_MVC5.Models.tb_Cart>
+@{
+    ViewBag.Title = "DirectSales";
+    Layout = "~/Views/Shared/_SalesLayout.cshtml";
+
+}
+
+
+@* add new & edit*@
+<section>
+
+    <div class="box box-info">
+
+        <div class="box-body">
+
+            <form class="form-horizontal" action="/Sales_DirectSales/AddorEdit" method="post">
+
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Product name</label>
+                    <input type="text" class="form-control col-sm-6" name="Name_Product" id="Name_Product" />
+                    <input type="hidden" name="ID_Product" id="ID_Product" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Product Price</label>
+                    <input type="text" class="form-control col-sm-6" name="Price" id="Price" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4">Product Quantity</label>
+                    <input type="text" class="form-control col-sm-6" name="Quantity" id="Quantity" />
+                </div>
+
+                <input type="submit" value="SAVE" class="btn btn-primary text-center" />
+            </form>
+            <br />
+            <form class="form-horizontal" action="/Sales_DirectSales/Clear" method="post">
+                <input type="submit" value="Clear" class="btn btn-danger text-center" />
+            </form>
+            </div>
+        </div>
+
+            <div class="box box-warning">
+
+                <div class="box-body table-responsive no-padding">
+
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>quantity</th>
+                            <th>Total</th>
+
+                        </tr>
+                        <tbody>
+                            @if (Model != null)
+            {
+                double sum = 0;
+                foreach (var item in Model)
+                {
+
+                    sum += (double)item.Total;
+
+                                    <tr class="main-data" data-id="@item.ID_Product">
+                                        <td>@item.Name_Product</td>
+                                        <td>@item.Price</td>
+                                        <td>@item.Quantity</td>
+                                        <td>@item.Total</td>
+                                        <td>
+                                            <a href="/Sales_DirectSales/Delete/@item.ID_Product">Delete</a> | <a href="#" onclick="showedit(this)">Edit</a>
+                                        </td>
+                                    </tr>
+
+                                }
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>Net Total : @sum</th>
+                                </tr>
+                            }
+
+
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+</section>
+
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script>
+            function showedit(objects) {
+                var _this = $(objects).closest(".main-data");
+                $("#Name_Product").val(_this.find("td").eq(0).html());
+                $("#Price").val(_this.find("td").eq(1).html());
+                $("#Quantity").val(_this.find("td").eq(2).html());
+
+                $("#ID_Product").val(_this.attr("data-id"));
+
+
+            }
+
+        </script>
+
